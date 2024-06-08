@@ -1,4 +1,10 @@
-const CrossIcon = () => {
+import { FC } from "react";
+
+interface CrossIconProps {
+  onClick?: () => void;
+}
+
+const CrossIcon: FC<CrossIconProps> = ({ onClick }) => {
   return (
     <svg
       width="24"
@@ -6,6 +12,7 @@ const CrossIcon = () => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick}
     >
       <path
         d="M8 8L16 16"

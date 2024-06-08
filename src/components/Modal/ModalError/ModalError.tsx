@@ -22,8 +22,8 @@ const ModalError: FC<ModalErrorProps> = ({ error, setError }) => {
 
   return (
     <Modal
-      title="Basic Modal"
       open={isVisible}
+      title="Basic Modal"
       onOk={handleCloseModal}
       onCancel={handleCloseModal}
     >

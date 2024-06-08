@@ -8,6 +8,10 @@ import {
   FormLinksWrapperDown,
 } from "./styles";
 import { ChangeEventHandler, FC, FormEventHandler, useState } from "react";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { useActions } from "../../hooks/useActions";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { authSelector } from "../../store/selectors";
 
 interface AuthFormProps {
   handleAuthorizateUser: (email: string, password: string) => void;
@@ -17,6 +21,10 @@ const AuthForm: FC<AuthFormProps> = ({ handleAuthorizateUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { isChecked } = useAppSelector(authSelector);
+
+  const { setIsChecked } = useActions();
+ 
   const handleChangeEmail: ChangeEventHandler<HTMLInputElement> = (event) => {
     setEmail(event.target.value);
   };
@@ -25,6 +33,10 @@ const AuthForm: FC<AuthFormProps> = ({ handleAuthorizateUser }) => {
     event
   ) => {
     setPassword(event.target.value);
+  };
+
+  const handleChechBox = (event: CheckboxChangeEvent) => {
+    setIsChecked(event.target.checked);
   };
 
   const handleSubmit: FormEventHandler = (event) => {
@@ -47,7 +59,9 @@ const AuthForm: FC<AuthFormProps> = ({ handleAuthorizateUser }) => {
         onChange={handleChangePassword}
       />
       <CheckboxWrapper>
-        <Checkbox>Запомнить меня</Checkbox>
+        <Checkbox checked={isChecked} onChange={handleChechBox}>
+          Запомнить меня
+        </Checkbox>
       </CheckboxWrapper>
       <Button>Войти</Button>
       <FormLinksWrapper>

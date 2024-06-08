@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import CrossIcon from "../../assets/CrossIcon";
 import LogoutIcon from "../../assets/LogoutIcon";
 import UserIcon from "../../assets/UserIcon";
@@ -18,6 +18,7 @@ import {
   DropDownMenuWrapper,
 } from "./styles";
 import { IUser } from "../../models/IUser";
+import ModalWarning from "../Modal/ModalWarning/ModalWarning";
 
 interface DropDownMenuProps {
   isVisible: boolean;
@@ -32,8 +33,14 @@ const DropDownMenu: FC<DropDownMenuProps> = ({
   handleSetIsVisible,
   logoutUser,
 }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const handleLogoutUser = () => {
     logoutUser();
+  };
+
+  const handleModalOpen = () => {
+    setIsModalVisible(true);
   };
 
   const userName = user.email.split("@")[0];
@@ -49,10 +56,10 @@ const DropDownMenu: FC<DropDownMenuProps> = ({
             <DropDownMenuCross onClick={handleSetIsVisible}>
               <CrossIcon />
             </DropDownMenuCross>
+            <DropDownMenuCenterTitle>
+              <span>Смена пользователя</span>
+            </DropDownMenuCenterTitle>
             <DropDownMenuCenter>
-              <DropDownMenuCenterTitle>
-                <span>Смена пользователя</span>
-              </DropDownMenuCenterTitle>
               <DropDownMenuCenterUser isUserActive={isUserActive}>
                 <span>
                   <UserIcon />
@@ -68,7 +75,7 @@ const DropDownMenu: FC<DropDownMenuProps> = ({
               <Hr />
               <DropDownMenuDown>
                 <SpanLogout>Выход</SpanLogout>
-                <span onClick={handleLogoutUser}>
+                <span onClick={handleModalOpen}>
                   <LogoutIcon />
                 </span>
               </DropDownMenuDown>
@@ -76,6 +83,13 @@ const DropDownMenu: FC<DropDownMenuProps> = ({
           </DropDownMenuWrapper>
         )}
       </DropDownMenuContent>
+      <ModalWarning
+        isVisible={isModalVisible}
+        title="Вы точно хотите выйти?"
+        buttonTitle="Выйти"
+        setIsVisible={setIsModalVisible}
+        onClick={handleLogoutUser}
+      />
     </DropDownMenuContainer>
   );
 };

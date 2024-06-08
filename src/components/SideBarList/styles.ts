@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 interface SideBarMenuContentProps {
@@ -5,6 +6,16 @@ interface SideBarMenuContentProps {
 }
 
 export const SideBarMenuContent = styled.div<SideBarMenuContentProps>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: ${({ isActive }) => (isActive ? "#8D7FC7" : "")};
+  color: ${({ isActive }) => (isActive ? "#fff" : "")};
+`;
+
+export const SideBarMenuContentLink = styled(NavLink)<SideBarMenuContentProps>`
   display: flex;
   align-items: center;
   gap: 10px;

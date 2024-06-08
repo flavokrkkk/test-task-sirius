@@ -4,4 +4,5 @@ export interface IMenu {
   id: number;
   value: string;
   svg: React.ReactNode;
+  route?: string;
 }

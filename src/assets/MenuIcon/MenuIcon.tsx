@@ -1,4 +1,5 @@
 import { IMenu } from "../../models/IMenu";
+import { RoutesName } from "../../utils";
 import ConnectIcon from "../ConnectIcon";
 import HomeIcon from "../HomeIcon";
 import LessIcon from "../LessIcon";
@@ -14,8 +15,14 @@ export const menuItems: IMenu[] = [
     id: 1,
     value: "Главная",
     svg: <HomeIcon />,
+    route: RoutesName.HOME_ROUTE,
   },
-  { id: 2, value: "Расписание", svg: <LessIcon /> },
+  {
+    id: 2,
+    value: "Расписание",
+    svg: <LessIcon />,
+    route: RoutesName.LESS_ROUTE,
+  },
   { id: 3, value: "Оплата", svg: <WaletIcon /> },
   { id: 4, value: "Достижения", svg: <RecordIcon /> },
   { id: 5, value: "Тренажеры", svg: <TrainerIcon /> },

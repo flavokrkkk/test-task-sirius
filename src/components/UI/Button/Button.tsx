@@ -1,12 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 import { ButtonComponent } from "./styles";
-import { ButtonColor, ButtonSize } from "../../../utils";
+import { ButtonColor, ButtonSize, ButtonVariant } from "../../../utils";
 
 export interface ButtonProps {
   onClick?: () => void;
   size?: ButtonSize;
   color?: ButtonColor;
   isBorder?: boolean;
+  variant?: ButtonVariant;
 }
 const Button: FC<PropsWithChildren<ButtonProps>> = ({
   children,
@@ -14,10 +15,12 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
   color = ButtonColor.secondary,
   size = ButtonSize.md,
   isBorder = true,
+  variant = ButtonVariant.outlined,
 }) => {
   return (
     <>
       <ButtonComponent
+        variant={variant}
         isBorder={isBorder}
         color={color}
         size={size}

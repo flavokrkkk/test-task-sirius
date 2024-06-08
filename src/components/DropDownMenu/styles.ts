@@ -12,8 +12,9 @@ export const DropDownMenuContainer = styled.div`
 export const DropDownMenuContent = styled.div`
   display: flex;
   justify-content: flex-end;
-  max-width: 250px;
+  max-width: 270px;
   position: absolute;
+  z-index: 999;
 `;
 
 export const DropDownMenuWrapper = styled.div`
@@ -23,6 +24,7 @@ export const DropDownMenuWrapper = styled.div`
   border-radius: 15px;
   padding: 5px;
   width: 320px;
+  background-color: #fff;
 `;
 
 export const DropDownMenuCross = styled.div`
@@ -39,9 +41,9 @@ export const DropDownMenuCenter = styled.div`
 export const DropDownMenuCenterUser = styled.div<DropDownMenuCenterUserProps>`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   background-color: ${({ isUserActive }) => isUserActive && "#eeeeff"};
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   padding: 5px;
   border-radius: 15px;
 `;
@@ -63,9 +65,10 @@ export const SpanLogout = styled.span`
 `;
 
 export const DropDownMenuCenterTitle = styled.div`
-  margin-bottom: 25px;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
 `;
 
 export const Hr = styled.hr`

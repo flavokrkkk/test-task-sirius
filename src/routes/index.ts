@@ -1,7 +1,7 @@
 import { IRoute } from "../models/IRoute";
 import AuthPage from "../pages/AuthPage/AuthPage";
 import HomePage from "../pages/HomePage/HomePage";
-import ProfilePage from "../pages/ProfilePage/ProfilePage";
+import LessPage from "../pages/LessPage/LessPage";
 import { RoutesName } from "../utils";
 
 export const publicRoutes = <IRoute[]>[
@@ -17,7 +17,7 @@ export const privateRoutes = <IRoute[]>[
     component: HomePage,
   },
   {
-    path: RoutesName.PROFILE_ROUTE,
-    component: ProfilePage,
+    path: RoutesName.LESS_ROUTE,
+    component: LessPage,
   },
 ];
