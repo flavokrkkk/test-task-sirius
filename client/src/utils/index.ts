@@ -1,4 +1,4 @@
-import { ITime } from "../models/ITime";
+import { IOptions } from "../models/IOptions";
 
 export const enum RoutesName {
   AUTH_ROUTE = "/login",
@@ -25,7 +25,7 @@ export const enum ButtonSize {
 }
 
 //типизировать
-export const options = [
+export const options = <IOptions[]>[
   { value: "Арифметика", label: "Арифметика" },
   { value: "Программирование", label: "Программирование" },
   { value: "Скорочтение", label: "Скорочтение" },
@@ -39,7 +39,7 @@ export const lessons = [
   { value: "Английский" },
 ];
 
-export const optionTimes = <ITime[]>[
+export const optionTimes = <IOptions[]>[
   { value: "9:45-10:30", label: "9:45-10:30" },
   { value: "10:30-11:15", label: "10:30-11:15" },
   { value: "11:15-12:00", label: "11:15-12:00" },
@@ -51,12 +51,12 @@ export const optionTimes = <ITime[]>[
   { value: "16:15-17:00", label: "16:15-17:00" },
 ];
 
-export const getTeacher = (less: string) => {
-  const teacher = {
-    Арифметика: "Белкина Инна",
-    Скорочтение: "Мин Елене",
-    Программирование: "Животновская Оксана",
-    Английский: "Яровицын Егор",
-  };
-  return teacher[`${less}`];
-};
+export const groupNumeric = [
+  { value: "5A", label: "5A" },
+  { value: "6A", label: "6A" },
+  { value: "7A", label: "7A" },
+  { value: "8A", label: "8A" },
+  { value: "9A", label: "9A" },
+  { value: "10A", label: "10A" },
+  { value: "11A", label: "11A" },
+];

@@ -8,6 +8,9 @@ import { IUser } from "../../../models/IUser";
 import { $authHost, $host } from "../../../api";
 import { jwtDecode } from "jwt-decode";
 import { IToken } from "../../../models/IToken";
+import axios from "axios";
+import { url } from "../../../utils/baseUrl";
+import { IGroup } from "../../../models/IGroup";
 
 const createSliceWithThunks = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -15,6 +18,7 @@ const createSliceWithThunks = buildCreateSlice({
 
 const initialState = <AuthState>{
   user: {},
+  group: [] as IGroup[],
   isAuth: false,
   isChecked: false,
   isLoading: false,
@@ -38,6 +42,9 @@ export const authSlice = createSliceWithThunks({
         state.isChecked = payload;
       }
     ),
+    setGroup: create.reducer((state, { payload }: PayloadAction<IGroup[]>) => {
+      state.group = payload;
+    }),
 
     setAsyncAuthorizate: create.asyncThunk<
       IUser,
@@ -45,6 +52,7 @@ export const authSlice = createSliceWithThunks({
       { rejectValue: string }
     >(
       async (requestParams, { rejectWithValue }) => {
+        console.log(requestParams);
         try {
           const { data } = await $host.post<IToken>(
             "api/user/registration",
@@ -67,6 +75,9 @@ export const authSlice = createSliceWithThunks({
         fulfilled: (state, { payload }: PayloadAction<IUser>) => {
           state.isAuth = true;
           state.user = payload!;
+          const token = localStorage.getItem("token") || "";
+          state.group.push({ ...payload, token });
+          localStorage.setItem("group", JSON.stringify(state.group));
           state.isLoading = false;
         },
         rejected: (state, { payload }: PayloadAction<string | undefined>) => {
@@ -137,6 +148,38 @@ export const authSlice = createSliceWithThunks({
         fulfilled: (state, { payload }: PayloadAction<IUser>) => {
           state.isAuth = true;
           state.user = payload;
+          state.isLoading = false;
+        },
+        rejected: (state, { payload }: PayloadAction<string | unknown>) => {
+          state.isLoading = false;
+          state.error = payload;
+        },
+      }
+    ),
+
+    switchUserAsync: create.asyncThunk<IToken, string, { rejectValue: string }>(
+      async (token, { rejectWithValue }) => {
+        try {
+          const { data } = await axios.get<IToken>(
+            url.REACT_APP_API_URL + "api/user/auth",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          return data;
+        } catch (err) {
+          return rejectWithValue(`${err}`);
+        }
+      },
+      {
+        pending: (state) => {
+          state.isLoading = true;
+        },
+        fulfilled: (state, { payload }) => {
+          localStorage.setItem("token", payload.token);
+          const currUser: IUser = jwtDecode(payload.token);
+          localStorage.setItem("email", currUser.email);
+          state.user = jwtDecode(payload.token);
           state.isLoading = false;
         },
         rejected: (state, { payload }: PayloadAction<string | unknown>) => {

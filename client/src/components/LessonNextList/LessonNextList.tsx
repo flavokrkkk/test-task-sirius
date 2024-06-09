@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { ILess } from "../../models/ILess";
-import { getMonthName } from "../../utils/date";
 import Button from "../UI/Button/Button";
 import { ButtonSize } from "../../utils";
 import {
@@ -11,6 +10,7 @@ import {
   SpanDay,
   SpanMonth,
 } from "./styles";
+import { getMonthName } from "../../helper/getMonthName";
 
 interface LessonNextListProps {
   lesson: ILess;

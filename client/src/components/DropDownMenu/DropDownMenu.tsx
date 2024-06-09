@@ -1,14 +1,11 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import CrossIcon from "../../assets/CrossIcon";
 import LogoutIcon from "../../assets/LogoutIcon";
-import UserIcon from "../../assets/UserIcon";
 import {
   DropDownMenuCenter,
   DropDownMenuCenterTitle,
-  DropDownMenuCenterUser,
   DropDownMenuDown,
   Hr,
-  Span,
   SpanLogout,
 } from "./styles";
 import {
@@ -19,21 +16,28 @@ import {
 } from "./styles";
 import { IUser } from "../../models/IUser";
 import ModalWarning from "../Modal/ModalWarning/ModalWarning";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { authSelector } from "../../store/selectors";
+import DropDownList from "../DropDownList/DropDownList";
 
 interface DropDownMenuProps {
   isVisible: boolean;
   user: IUser;
-  handleSetIsVisible: () => void;
+  setIsVisible: (active: boolean) => void;
   logoutUser: () => void;
 }
 
 const DropDownMenu: FC<DropDownMenuProps> = ({
   isVisible,
   user,
-  handleSetIsVisible,
+  setIsVisible,
   logoutUser,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const { group } = useAppSelector(authSelector);
+
+  const dropRef = useRef<HTMLDivElement>(null);
 
   const handleLogoutUser = () => {
     logoutUser();
@@ -43,33 +47,37 @@ const DropDownMenu: FC<DropDownMenuProps> = ({
     setIsModalVisible(true);
   };
 
-  const userName = user.email.split("@")[0];
-  const isUserActive = user.email === localStorage.getItem("email");
+  const handleCloseDropDown = () => {
+    setIsVisible(false);
+  };
+
+  // useEffect(() => {
+  //   dropRef.current?.addEventListener("mouseout", (event: MouseEvent) => {
+  //     if (!dropRef.current?.contains(event.relatedTarget as Node)) {
+  //       setIsVisible(false);
+  //     }
+  //   });
+  // }, []);
 
   return (
-    <DropDownMenuContainer>
+    <DropDownMenuContainer ref={dropRef}>
       <DropDownMenuContent>
         {isVisible && (
           <DropDownMenuWrapper>
-            <DropDownMenuCross onClick={handleSetIsVisible}>
+            <DropDownMenuCross onClick={handleCloseDropDown}>
               <CrossIcon />
             </DropDownMenuCross>
             <DropDownMenuCenterTitle>
               <span>Смена пользователя</span>
             </DropDownMenuCenterTitle>
             <DropDownMenuCenter>
-              <DropDownMenuCenterUser isUserActive={isUserActive}>
-                <span>
-                  <UserIcon />
-                </span>
-                <Span>{userName}</Span>
-              </DropDownMenuCenterUser>
-              <DropDownMenuCenterUser isUserActive={isUserActive}>
-                <span>
-                  <UserIcon />
-                </span>
-                <Span>andry121</Span>
-              </DropDownMenuCenterUser>
+              {group.map((g) => (
+                <DropDownList
+                  group={g}
+                  user={user}
+                  setIsVisible={setIsVisible}
+                />
+              ))}
               <Hr />
               <DropDownMenuDown>
                 <SpanLogout>Выход</SpanLogout>

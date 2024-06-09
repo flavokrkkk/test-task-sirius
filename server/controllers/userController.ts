@@ -4,15 +4,20 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/models.ts");
 
-const generateJwt = (id: number, email: string, role: string) => {
-  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
+const generateJwt = (
+  id: number,
+  email: string,
+  role: string,
+  groupId: string,
+) => {
+  return jwt.sign({ id, email, role, groupId }, process.env.SECRET_KEY, {
     expiresIn: "24h",
   });
 };
 
 class UserController {
   async registration(req: any, res: any, next: any) {
-    const { email, password, role } = req.body;
+    const { email, password, role, groupId } = req.body;
     if (!email || !password) {
       return next(ApiError.badRequest("Неккоректный email или password!"));
     }
@@ -23,8 +28,13 @@ class UserController {
       );
     }
     const hashPassword = await bcrypt.hash(password, 5);
-    const user = await User.create({ email, role, password: hashPassword });
-    const token = generateJwt(user.id, user.email, user.role);
+    const user = await User.create({
+      email,
+      role,
+      groupId,
+      password: hashPassword,
+    });
+    const token = generateJwt(user.id, user.email, user.role, user.groupId);
     return res.json({ token });
   }
 
@@ -38,12 +48,17 @@ class UserController {
     if (!comparePassword) {
       return next(ApiError.internal("Пользователь не найден!"));
     }
-    const token = generateJwt(user.id, user.email, user.role);
+    const token = generateJwt(user.id, user.email, user.role, user.groupId);
     return res.json({ token });
   }
 
   async check(req: any, res: any, next: any) {
-    const token = generateJwt(req.user.id, req.user.email, req.user.role);
+    const token = generateJwt(
+      req.user.id,
+      req.user.email,
+      req.user.role,
+      req.user.groupId,
+    );
     return res.status(200).json({ token });
   }
 }

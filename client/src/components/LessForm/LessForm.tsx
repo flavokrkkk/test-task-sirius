@@ -1,15 +1,16 @@
 import { DatePicker, Select } from "antd";
 import Button from "../UI/Button/Button";
-import { ButtonSize, getTeacher, optionTimes, options } from "../../utils";
+import { ButtonSize, optionTimes, options } from "../../utils";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { authSelector, lessSelector } from "../../store/selectors";
 import { FC, FormEventHandler, useEffect, useState } from "react";
 import { ILess } from "../../models/ILess";
 import { Moment } from "moment";
-import { formatDate } from "../../utils/date";
 import { FormControl } from "./styles";
 import { useActions } from "../../hooks/useActions";
 import ModalWarning from "../Modal/ModalWarning/ModalWarning";
+import { formatDate } from "../../helper/formatDate";
+import { getTeacher } from "../../helper/getTeacher";
 
 interface LessFormProps {
   createFormLess: (less: ILess) => void;

@@ -4,7 +4,7 @@ import { ILess } from "../../models/ILess";
 import { LessContent, LessIcon, LessIconBlock, LessIconTitle } from "./styles";
 import CrossIcon from "../../assets/CrossIcon";
 import ModalWarning from "../Modal/ModalWarning/ModalWarning";
-import { formatDate } from "../../utils/date";
+import { formatDate } from "../../helper/formatDate";
 
 interface LessItemProps {
   less: ILess;
@@ -28,7 +28,7 @@ const LessItem: FC<LessItemProps> = ({ less, removeLess }) => {
     <LessContent isLastDate={isLastDate}>
       <LessIconBlock>
         <div>{less.time}</div>
-        <LessIconTitle>{less.less}</LessIconTitle>
+        <LessIconTitle isLastDate={isLastDate}>{less.less}</LessIconTitle>
       </LessIconBlock>
       <LessIcon>
         <WaletOrangeIcon />

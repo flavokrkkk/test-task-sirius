@@ -2,9 +2,9 @@ import { Calendar } from "antd";
 import { ILess } from "../../models/ILess";
 import { FC } from "react";
 import { Moment } from "moment";
-import { formatDate } from "../../utils/date";
 import LessItem from "../LessItem/LessItem";
 import { useActions } from "../../hooks/useActions";
+import { formatDate } from "../../helper/formatDate";
 
 interface LessCalendarProps {
   less: ILess[];

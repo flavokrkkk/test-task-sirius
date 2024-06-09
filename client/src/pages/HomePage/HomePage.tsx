@@ -20,7 +20,7 @@ const HomePage = () => {
 
   const { fetchLess, setSortUserLess } = useActions();
 
-  const { getDefiniteLess } = useActions();
+  const { getDefiniteLess, groupForUser } = useActions();
 
   const navigate = useNavigate();
 
@@ -33,9 +33,8 @@ const HomePage = () => {
   useEffect(() => {
     fetchLess(user.email);
     setSortUserLess(user.email);
+    groupForUser(user.groupId!);
   }, []);
-
-  console.log(sortLess);
 
   return (
     <HomeContainer>

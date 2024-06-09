@@ -24,7 +24,7 @@ const LessPage = () => {
 
   const { less } = useAppSelector(lessSelector);
 
-  const { fetchLess, filterLess } = useActions();
+  const { fetchLess, filterLess, groupForUser } = useActions();
 
   const handleOpenModal = () => {
     setIsVisible(true);
@@ -42,9 +42,12 @@ const LessPage = () => {
 
   useEffect(() => {
     fetchLess(user.email);
+    groupForUser(user.groupId!);
   }, []);
 
-  useEffect(() => {}, [value]);
+  useEffect(() => {
+    setValue("Выбрать предмет");
+  }, [localStorage.getItem("email")]);
 
   return (
     <LessContainer>

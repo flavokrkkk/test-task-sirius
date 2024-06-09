@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-interface DropDownMenuCenterUserProps {
-  isUserActive: boolean;
-}
-
 export const DropDownMenuContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -38,26 +34,11 @@ export const DropDownMenuCenter = styled.div`
   padding: 25px;
 `;
 
-export const DropDownMenuCenterUser = styled.div<DropDownMenuCenterUserProps>`
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  background-color: ${({ isUserActive }) => isUserActive && "#eeeeff"};
-  margin-bottom: 15px;
-  padding: 5px;
-  border-radius: 15px;
-`;
-
 export const DropDownMenuDown = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
-`;
-
-export const Span = styled.span`
-  font-size: 12px;
-  cursor: pointer;
 `;
 
 export const SpanLogout = styled.span`

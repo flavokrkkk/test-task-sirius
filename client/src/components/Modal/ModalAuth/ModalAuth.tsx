@@ -1,7 +1,7 @@
-import { Input, Modal } from "antd";
+import { Input, Modal, Select } from "antd";
 import { ChangeEventHandler, FC, useState } from "react";
 import Button from "../../UI/Button/Button";
-import { ButtonColor, ButtonSize } from "../../../utils";
+import { ButtonColor, ButtonSize, groupNumeric } from "../../../utils";
 import { ModalAuthForm, ModalAuthTitle, ModalAuthWrapper } from "./styles";
 import { IUser } from "../../../models/IUser";
 
@@ -18,6 +18,7 @@ const ModalAuth: FC<ModalAuthProps> = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [groups, setGroups] = useState("");
 
   const handleChangeEmail: ChangeEventHandler<HTMLInputElement> = (event) => {
     setEmail(event.target.value);
@@ -29,13 +30,19 @@ const ModalAuth: FC<ModalAuthProps> = ({
     setPassword(event.target.value);
   };
 
+  const handleSelectGroup = (group: string) => {
+    setGroups(group);
+  };
+
   const handleCanselModal = () => {
     setIsVisible(false);
   };
 
   const handleAsyncAuthorizate = () => {
-    setAsyncAuthorizate({ email, password });
+    setAsyncAuthorizate({ email, password, groupId: groups });
   };
+
+  console.log(groups);
 
   return (
     <Modal
@@ -67,6 +74,11 @@ const ModalAuth: FC<ModalAuthProps> = ({
           size="large"
           value={password}
           onChange={handleChangePassword}
+        />
+        <Select
+          options={groupNumeric}
+          value={groups}
+          onChange={handleSelectGroup}
         />
       </ModalAuthForm>
     </Modal>

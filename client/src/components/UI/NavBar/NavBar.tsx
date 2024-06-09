@@ -13,9 +13,9 @@ import DropDownMenu from "../../DropDownMenu/DropDownMenu";
 import { useActions } from "../../../hooks/useActions";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { authSelector } from "../../../store/selectors";
-import { formatName } from "../../../utils/nameFormat";
 import { useLocation } from "react-router-dom";
 import { RoutesName } from "../../../utils";
+import { formatName } from "../../../helper/formatName";
 
 const NavBar = () => {
   const { user } = useAppSelector(authSelector);
@@ -29,7 +29,7 @@ const NavBar = () => {
   const isPathName = pathname === RoutesName.HOME_ROUTE;
 
   const handleSetIsVisible = () => {
-    setIsVisible(!isVisible);
+    setIsVisible(true);
   };
 
   return (
@@ -57,7 +57,7 @@ const NavBar = () => {
       <DropDownMenu
         isVisible={isVisible}
         user={user}
-        handleSetIsVisible={handleSetIsVisible}
+        setIsVisible={setIsVisible}
         logoutUser={logoutUser}
       />
     </NavBarContainer>

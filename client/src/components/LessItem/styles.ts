@@ -4,6 +4,10 @@ interface LessContentProps {
   isLastDate: boolean;
 }
 
+interface LessIconTitleProps {
+  isLastDate: boolean;
+}
+
 export const LessContent = styled.div<LessContentProps>`
   display: flex;
   border: 1px solid #ececec;
@@ -26,6 +30,8 @@ export const LessIcon = styled.div`
   gap: 10px;
 `;
 
-export const LessIconTitle = styled.div`
+export const LessIconTitle = styled.div<LessIconTitleProps>`
   font-size: 12px;
+  text-decoration: ${({ isLastDate }) =>
+    isLastDate ? "none" : "line-through"};
 `;
