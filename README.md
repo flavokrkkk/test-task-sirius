@@ -11,6 +11,9 @@
 <h3>Моадльное окно в котором пользователь может зарегистрироваться в приложении, выбрать группу к которой будет прикреплен, также регистрация, авторизация реализованы с помощью JWT токена, также refresh токен при обновлении страницы</h3>
 <img src="https://github.com/flavokrkkk/test-task-sirius/blob/master/screens/2024-06-10_09-41-42.png">
 
+<h3>Обраюотка ввода некоректных данных</h3>
+<img src="https://github.com/flavokrkkk/test-task-sirius/blob/master/screens/2024-06-10_10-58-28.png">
+
 <h3>При входе в приложение нас переносит на главную страницу со всей статистикой пользователя</h3>
 <img src="https://github.com/flavokrkkk/test-task-sirius/blob/master/screens/2024-06-10_09-46-48.png">
 
@@ -30,5 +33,3 @@
 <img src="https://github.com/flavokrkkk/test-task-sirius/blob/master/screens/2024-06-10_09-43-12.png">
 
 
-<h3>Обраюотка ввода некоректных данных</h3>
-<img src="https://github.com/flavokrkkk/test-task-sirius/blob/master/screens/2024-06-10_10-58-28.png">
