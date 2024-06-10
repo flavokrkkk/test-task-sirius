@@ -16,7 +16,7 @@ import ContentNextLesson from "../../layout/content/ContentNextLesson/ContentNex
 const HomePage = () => {
   const { user } = useAppSelector(authSelector);
 
-  const { sortLess } = useAppSelector(lessSelector);
+  const { sortLess, less } = useAppSelector(lessSelector);
 
   const { fetchLess, setSortUserLess } = useActions();
 
@@ -35,6 +35,10 @@ const HomePage = () => {
     setSortUserLess(user.email);
     groupForUser(user.groupId!);
   }, []);
+
+  useEffect(() => {
+    setSortUserLess(user.email);
+  }, [less.length]);
 
   return (
     <HomeContainer>
@@ -63,7 +67,7 @@ const HomePage = () => {
             {sortLess.map((lesson) => (
               <>
                 {Number(lesson.date.split(".")[2]) - 12 < currentDate && (
-                  <LessonNextList lesson={lesson} />
+                  <LessonNextList lesson={lesson} user={user} />
                 )}
               </>
             ))}

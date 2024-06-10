@@ -47,6 +47,8 @@ const LessPage = () => {
 
   useEffect(() => {
     setValue("Выбрать предмет");
+    fetchLess(user.email);
+    groupForUser(user.groupId!);
   }, [localStorage.getItem("email")]);
 
   return (

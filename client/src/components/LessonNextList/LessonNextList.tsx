@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { ILess } from "../../models/ILess";
 import Button from "../UI/Button/Button";
 import { ButtonSize } from "../../utils";
@@ -11,16 +11,33 @@ import {
   SpanMonth,
 } from "./styles";
 import { getMonthName } from "../../helper/getMonthName";
+import { useActions } from "../../hooks/useActions";
+import { IUser } from "../../models/IUser";
+import ModalWarning from "../Modal/ModalWarning/ModalWarning";
 
 interface LessonNextListProps {
   lesson: ILess;
+  user: IUser;
 }
 
-const LessonNextList: FC<LessonNextListProps> = ({ lesson }) => {
+const LessonNextList: FC<LessonNextListProps> = ({ lesson, user }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const { removeLess } = useActions();
+
+  const handleRemoveLesson = () => {
+    removeLess(lesson.id!, user.email);
+  };
+
+  const handleOpenModal = () => {
+    setIsVisible(true);
+  };
+
   const day =
     lesson.date.split(".")[2][0] === "0"
       ? lesson.date.split(".")[2].slice(1)
       : lesson.date.split(".")[2];
+
   return (
     <LessonNextListContainer>
       <LessonNextListWrapper>
@@ -35,10 +52,19 @@ const LessonNextList: FC<LessonNextListProps> = ({ lesson }) => {
         <span>{lesson.teacher}</span>
         <LessonNextButton>
           <Button size={ButtonSize.sm}>Перенести</Button>
-          <Button size={ButtonSize.sm}>Удалить</Button>
+          <Button size={ButtonSize.sm} onClick={handleOpenModal}>
+            Удалить
+          </Button>
         </LessonNextButton>
       </LessonNextListWrapper>
       <hr />
+      <ModalWarning
+        isVisible={isVisible}
+        title="Подтвердите удаление"
+        buttonTitle="Удалить"
+        onClick={handleRemoveLesson}
+        setIsVisible={setIsVisible}
+      />
     </LessonNextListContainer>
   );
 };

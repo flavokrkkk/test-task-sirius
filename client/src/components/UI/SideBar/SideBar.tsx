@@ -7,12 +7,14 @@ import {
   SideBarDownContent,
   SideBarDownContentBody,
   SideBarDownContentFooter,
+  SideBarDownContentImage,
   SideBarDownContentTitle,
   SideBarUpContent,
 } from "./styles";
 import SideBarList from "../../SideBarList/SideBarList";
 import Button from "../Button/Button";
 import { ButtonColor } from "../../../utils";
+import GiftIcon from "../../../assets/GiftIcon";
 
 interface SideBarProps {
   items: IMenu[];
@@ -50,10 +52,13 @@ const SideBar: FC<SideBarProps> = ({ items }) => {
         </SideBarDownContentBody>
 
         <SideBarDownContentFooter>
-          <Button color={ButtonColor.inherit}>Узнать</Button>
-          {/* <SideBarDownContentImage>
+          <div>
+            <Button color={ButtonColor.inherit}>Узнать</Button>
+          </div>
+
+          <SideBarDownContentImage>
             <GiftIcon />
-          </SideBarDownContentImage> */}
+          </SideBarDownContentImage>
         </SideBarDownContentFooter>
       </SideBarDownContent>
     </SideBarContainer>

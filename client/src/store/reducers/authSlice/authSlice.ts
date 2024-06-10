@@ -52,7 +52,6 @@ export const authSlice = createSliceWithThunks({
       { rejectValue: string }
     >(
       async (requestParams, { rejectWithValue }) => {
-        console.log(requestParams);
         try {
           const { data } = await $host.post<IToken>(
             "api/user/registration",

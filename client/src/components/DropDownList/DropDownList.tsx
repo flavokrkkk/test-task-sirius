@@ -30,7 +30,6 @@ const DropDownList: FC<DropDownMenuProps> = ({ group, user, setIsVisible }) => {
 
   const handleOpenModal = () => {
     setIsVisibleModal(true);
-    console.log("feeff");
   };
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import Button from "../../../components/UI/Button/Button";
 import { ButtonColor, ButtonVariant } from "../../../utils";
 import {
   BodyWrapper,
+  BodyWrapperImage,
   BodyWrapperText,
   BunnerTitle,
   BunnerWrapper,
@@ -11,6 +12,7 @@ import {
   HomeWrapperTimer,
   TimerTitle,
 } from "./styles";
+import image from "../../../assets/7ff0089ca66213cc5b0358b6bd876890.png";
 
 const HomeContentUp = () => {
   return (
@@ -24,6 +26,9 @@ const HomeContentUp = () => {
             До конца года у вас есть уникальная возможность воспользоваться
             нашей новогодней скидкой 20% на любой курс!
           </BodyWrapperText>
+          <BodyWrapperImage>
+            <img src={image} width={220} height={220} />
+          </BodyWrapperImage>
         </BodyWrapper>
       </HomeWrapperBunner>
 

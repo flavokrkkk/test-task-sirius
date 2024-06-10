@@ -11,9 +11,3 @@ export const ModalAuthTitle = styled.h1`
   font-weight: 400;
   margin-bottom: 30px;
 `;
-
-export const ModalAuthForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;

@@ -23,9 +23,7 @@ export const AuthActionCreators = {
   groupForUser: (id: string) => (dispatch: AppDispatch) => {
     try {
       const group: IGroup[] = JSON.parse(localStorage.getItem("group") || "[]");
-      console.log(id);
       const currGroup = group.filter((group) => group.groupId === id);
-      console.log(currGroup);
       dispatch(AuthActionCreators.setGroup(currGroup));
     } catch (error) {
       console.log(error);

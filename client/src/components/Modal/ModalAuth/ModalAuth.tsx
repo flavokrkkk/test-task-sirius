@@ -1,9 +1,10 @@
-import { Input, Modal, Select } from "antd";
+import { Form, Input, Modal, Select } from "antd";
 import { ChangeEventHandler, FC, useState } from "react";
 import Button from "../../UI/Button/Button";
 import { ButtonColor, ButtonSize, groupNumeric } from "../../../utils";
-import { ModalAuthForm, ModalAuthTitle, ModalAuthWrapper } from "./styles";
+import { ModalAuthTitle, ModalAuthWrapper } from "./styles";
 import { IUser } from "../../../models/IUser";
+import FormItem from "antd/es/form/FormItem";
 
 interface ModalAuthProps {
   isVisible: boolean;
@@ -18,7 +19,7 @@ const ModalAuth: FC<ModalAuthProps> = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [groups, setGroups] = useState("");
+  const [groups, setGroups] = useState("Выбрать группу");
 
   const handleChangeEmail: ChangeEventHandler<HTMLInputElement> = (event) => {
     setEmail(event.target.value);
@@ -42,8 +43,6 @@ const ModalAuth: FC<ModalAuthProps> = ({
     setAsyncAuthorizate({ email, password, groupId: groups });
   };
 
-  console.log(groups);
-
   return (
     <Modal
       open={isVisible}
@@ -62,25 +61,33 @@ const ModalAuth: FC<ModalAuthProps> = ({
     >
       <ModalAuthTitle>Регистрация</ModalAuthTitle>
 
-      <ModalAuthForm>
-        <Input
-          placeholder="E-mail"
-          size="large"
-          value={email}
-          onChange={handleChangeEmail}
-        />
-        <Input
-          placeholder="Password"
-          size="large"
-          value={password}
-          onChange={handleChangePassword}
-        />
-        <Select
-          options={groupNumeric}
-          value={groups}
-          onChange={handleSelectGroup}
-        />
-      </ModalAuthForm>
+      <Form>
+        <FormItem>
+          <Input
+            placeholder="E-mail"
+            size="large"
+            value={email}
+            onChange={handleChangeEmail}
+          />
+        </FormItem>
+
+        <FormItem>
+          <Input
+            placeholder="Password"
+            size="large"
+            value={password}
+            onChange={handleChangePassword}
+          />
+        </FormItem>
+
+        <FormItem>
+          <Select
+            options={groupNumeric}
+            value={groups}
+            onChange={handleSelectGroup}
+          />
+        </FormItem>
+      </Form>
     </Modal>
   );
 };

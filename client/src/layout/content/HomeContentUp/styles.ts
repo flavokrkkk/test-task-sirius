@@ -56,3 +56,8 @@ export const TimerTitle = styled.h1`
   font-size: 50px;
   font-weight: 400;
 `;
+export const BodyWrapperImage = styled.div`
+  position: absolute;
+  left: 800px;
+  top: 190px;
+`;

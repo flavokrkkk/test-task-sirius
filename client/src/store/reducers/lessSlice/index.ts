@@ -22,7 +22,6 @@ export const LessActionCreators = {
   },
   fetchLess: (email: string) => (dispatch: AppDispatch) => {
     try {
-      console.log(email);
       const less: ILess[] = JSON.parse(localStorage.getItem("lesson") || "[]");
       const userLess = less.filter((less) => less.user === email);
       dispatch(LessActionCreators.setLess(userLess));
@@ -100,7 +99,6 @@ export const LessActionCreators = {
       const sortLess = currLess.sort(
         (a, b) => Number(a.date.split(".")[2]) - Number(b.date.split(".")[2])
       );
-      console.log(sortLess);
       dispatch(LessActionCreators.setSortLess(sortLess));
     } catch (err) {
       console.log(err);
